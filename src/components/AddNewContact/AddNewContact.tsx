@@ -1,14 +1,29 @@
 import * as S from './AddNewContact.styled';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import 'yup-phone';
 import styled from 'styled-components/macro';
 import React from 'react';
 import { Contact } from '../App';
 import { nanoid } from 'nanoid';
 
 let LoginSchema = yup.object().shape({
-  fullName: yup.string().required(),
-  phoneNumber: yup.string().required(),
+  fullName: yup
+    .string()
+    .trim()
+    .min(2, 'Full Name should consist of two or more letters')
+    .matches(
+      /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
+      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+    )
+    .required(),
+  phoneNumber: yup
+    .string()
+    .matches(
+      /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
+      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
+    )
+    .required(),
 });
 
 interface Props {
