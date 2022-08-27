@@ -10,9 +10,9 @@
 - Lint-Staged
 - GH pages auto deploy
 
-1. Change the name in package.json
+1. Change the fullName in package.json
 
-`"name": "REPO_NAME"`
+`"fullName": "REPO_NAME"`
 
 2. Change the homepage in package.json
 
