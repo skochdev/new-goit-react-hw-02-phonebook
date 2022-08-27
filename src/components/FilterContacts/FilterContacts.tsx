@@ -1,0 +1,25 @@
+import React, { ChangeEvent } from 'react';
+
+interface Props {
+  filterValue: string;
+  onFilterChange: (filterValue: string) => void;
+}
+
+export const FilterContacts: React.FC<Props> = ({
+  onFilterChange,
+  filterValue,
+}) => {
+  const handleFilter = (e: ChangeEvent) => {
+    const targetValue = (e.target as HTMLInputElement).value;
+    onFilterChange(targetValue);
+  };
+  return (
+    <input
+      type="text"
+      name="filter"
+      value={filterValue}
+      placeholder="Filter by name or phone number"
+      onChange={handleFilter}
+    />
+  );
+};

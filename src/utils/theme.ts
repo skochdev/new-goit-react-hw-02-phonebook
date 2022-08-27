@@ -4,7 +4,7 @@ export const theme: DefaultTheme = {
   borders: ['0', '2px solid', '4px solid', '100vw solid'],
   radii: {
     none: '0',
-    normal: '0.25rem',
+    normal: '0.4rem',
     round: '50%',
   },
   colors: {

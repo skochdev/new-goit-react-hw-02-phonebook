@@ -1,12 +1,14 @@
 import * as S from './AddNewContact.styled';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import 'yup-phone';
 import styled from 'styled-components/macro';
 import React from 'react';
 import { Contact } from '../App';
 import { nanoid } from 'nanoid';
+import { Box } from '../../utils/Box';
 
+// Yup validation schema ->
+//
 let LoginSchema = yup.object().shape({
   fullName: yup
     .string()
@@ -14,44 +16,46 @@ let LoginSchema = yup.object().shape({
     .min(2, 'Full Name should consist of two or more letters')
     .matches(
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
-      "Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+      'Name may contain only letters, apostrophe, dash and spaces'
     )
     .required(),
   phoneNumber: yup
     .string()
     .matches(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
+      'Must start with +, should consist of numbers, dashes or spaces'
     )
     .required(),
 });
 
-interface Props {
-  onAddNewContact: (newContact: Contact) => void;
-}
+// Yup validation schema <-
 
+// Formik-related ->
 const initialValues: Contact = {
   fullName: '',
   phoneNumber: '',
   id: '',
 };
 
-const ErrorText = styled.div`
-  display: inline-block;
-  font-size: ${p => p.theme.fontSizes.s};
-  color: ${p => p.theme.colors.accent};
-`;
-
 const ValidationError = ({ name }: { name: string }) => {
   return (
     <ErrorMessage
       name={name}
-      render={message => <ErrorText>{message}</ErrorText>}
+      render={message => <S.ErrorText>{message}</S.ErrorText>}
     />
   );
 };
+// Formik-related <-
+
+// Props +
+interface Props {
+  onAddNewContact: (newContact: Contact) => void;
+}
+
+// Props -
 
 export const AddNewContact: React.FC<Props> = ({ onAddNewContact }) => {
+  // collects form fields values and pass them up
   const handleSubmit = (
     values: Contact,
     { resetForm }: { resetForm: () => void }
@@ -66,17 +70,25 @@ export const AddNewContact: React.FC<Props> = ({ onAddNewContact }) => {
       onSubmit={handleSubmit}
       validationSchema={LoginSchema}>
       <S.Form as={Form}>
-        <label>
-          Full Name
-          <Field type="text" name="fullName" placeholder="fullName" />
-        </label>
-        <ValidationError name="fullName" />
-        <label>
-          Phone Number
-          <Field type="phone" name="phoneNumber" placeholder="phoneNumber" />
-        </label>
-        <ValidationError name="phoneNumber" />
-        <button type="submit">Submit</button>
+        <S.FieldWrapper>
+          <label>
+            Full Name
+            <Field type="text" name="fullName" placeholder="Obi-Wan Kenobi" />
+          </label>
+          <ValidationError name="fullName" />
+        </S.FieldWrapper>
+        <S.FieldWrapper>
+          <label>
+            Phone Number
+            <Field
+              type="phone"
+              name="phoneNumber"
+              placeholder="+380933065553"
+            />
+          </label>
+          <ValidationError name="phoneNumber" />
+        </S.FieldWrapper>
+        <button type="submit">Add Contact</button>
       </S.Form>
     </Formik>
   );
