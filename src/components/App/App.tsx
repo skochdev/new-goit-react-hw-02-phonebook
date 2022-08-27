@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Box } from '../utils/Box';
-import { AddNewContact } from './AddNewContact/AddNewContact';
-import { ContactList } from './ContactList/ContactList';
-import { FilterContacts } from './FilterContacts/FilterContacts';
+import * as S from './App.styled';
+import { Box } from '../../utils/Box';
+import { AddNewContact } from '../AddNewContact/AddNewContact';
+import { ContactList } from '../ContactList/ContactList';
+import { Filter } from '../Filter/Filter';
 
 export type Contact = {
   fullName: string;
@@ -24,7 +25,7 @@ class App extends Component {
         id: '123456sdf234sdfsd',
       },
       {
-        fullName: 'Hlushchenko Mariia',
+        fullName: 'Imaginary Friend',
         phoneNumber: '+380637463981',
         id: '12345sd1216sdf234sdfsd',
       },
@@ -40,15 +41,17 @@ class App extends Component {
         contacts: [...prevState.contacts, newContact],
         filter: '',
       }));
+    } else {
+      alert(`${newContact.fullName} is already is your contact list`);
     }
   };
 
   checkForDuplicate = (name: string) => {
     let { contacts } = this.state;
-    let normalizedName = name.toLowerCase();
+    let normalizedNewName = name.toLowerCase();
 
-    return contacts.some(contact =>
-      contact.fullName.toLowerCase().includes(normalizedName)
+    return contacts.some(
+      contact => contact.fullName.toLowerCase() === normalizedNewName
     );
   };
 
@@ -70,24 +73,36 @@ class App extends Component {
     );
     return (
       <main>
-        <Box as="section" my={4} mx={4}>
+        <Box as="section" my={5} mx={4}>
           <Box as="h1" textAlign="center">
             Phonebook
           </Box>
           <AddNewContact onAddNewContact={handleAddNewContact} />
-          <Box my={4} textAlign="center">
-            <FilterContacts
-              onFilterChange={handleFilter}
-              filterValue={filter}
-            />
+          <Box my={5} textAlign="center">
+            <Filter onFilterChange={handleFilter} filterValue={filter} />
           </Box>
-          <Box my={4} textAlign="center">
+          <Box my={5} textAlign="center">
             <ContactList
               contacts={filteredContacts}
               onDeleteContactClick={handleDeleteContact}
             />
           </Box>
         </Box>
+        <S.About as={Box} mx="auto" mt={5} width="600px">
+          <p>
+            This is a homework assignment. React class components, TypeScript.
+            Utilizing <span>Formik</span> for forms,
+            <span> yup</span> for validation,
+            <span> Styled Components</span> for styling,
+            <span> Styled System</span> for theming, <span>Box</span> custom
+            utility component.
+          </p>
+          <p>
+            At this point you're able to add/remove contacts, filter existing
+            ones, duplicates are ignored, alert informs about duplication.
+          </p>
+          <p>Styling is basic, styled components and Box mostly.</p>
+        </S.About>
       </main>
     );
   }

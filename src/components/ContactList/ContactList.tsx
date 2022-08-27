@@ -1,4 +1,4 @@
-import { Contact } from '../App';
+import { Contact } from '../App/App';
 import * as S from './ContactList.styled';
 import { Box } from '../../utils/Box';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -17,25 +17,35 @@ export const ContactList: React.FC<Props> = ({
     onDeleteContactClick(id);
   };
 
+  const contactsAvailable = contacts.length;
+
+  if (!contactsAvailable) {
+    return <Box as="h2">No results here</Box>;
+  }
+
   return (
     <Box as={S.ContactList} mx="auto">
-      {contacts.map(c => (
-        <Box
-          as="li"
-          key={c.id}
-          width="auto"
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between">
-          <p>{c.fullName}</p>
-          <p>{c.phoneNumber}</p>
-          <S.RemoveButton
-            type="button"
-            onClick={() => handleDeleteContactClick(c.id)}>
-            <AiFillCloseCircle size={20} />
-          </S.RemoveButton>
-        </Box>
-      ))}
+      {contactsAvailable && (
+        <>
+          {contacts.map(c => (
+            <Box
+              as="li"
+              key={c.id}
+              width="auto"
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between">
+              <p>{c.fullName}</p>
+              <p>{c.phoneNumber}</p>
+              <S.RemoveButton
+                type="button"
+                onClick={() => handleDeleteContactClick(c.id)}>
+                <AiFillCloseCircle size={20} />
+              </S.RemoveButton>
+            </Box>
+          ))}
+        </>
+      )}
     </Box>
   );
 };

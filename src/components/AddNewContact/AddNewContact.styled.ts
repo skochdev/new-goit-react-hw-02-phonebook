@@ -21,14 +21,13 @@ export const Form = styled.form`
     padding: ${p => p.theme.space[3]}px;
     border: ${p => p.theme.borders[1]};
     border-color: ${p => p.theme.colors.primary};
-    border-radius: ${p => p.theme.radii.normal};
+    border-radius: ${p => p.theme.radii.alwaysround};
   }
 
   button {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    margin-top: ${p => p.theme.space[5]}px;
   }
 `;
 

@@ -1,11 +1,9 @@
 import * as S from './AddNewContact.styled';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import styled from 'styled-components/macro';
 import React from 'react';
-import { Contact } from '../App';
+import { Contact } from '../App/App';
 import { nanoid } from 'nanoid';
-import { Box } from '../../utils/Box';
 
 // Yup validation schema ->
 //
@@ -18,14 +16,14 @@ let LoginSchema = yup.object().shape({
       /^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$/,
       'Name may contain only letters, apostrophe, dash and spaces'
     )
-    .required(),
+    .required('This field is required'),
   phoneNumber: yup
     .string()
     .matches(
       /\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}/,
       'Must start with +, should consist of numbers, dashes or spaces'
     )
-    .required(),
+    .required('This field is required'),
 });
 
 // Yup validation schema <-

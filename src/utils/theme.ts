@@ -1,11 +1,12 @@
 import { DefaultTheme } from 'styled-components';
 
 export const theme: DefaultTheme = {
-  borders: ['0', '2px solid', '4px solid', '100vw solid'],
+  borders: ['0', '2px solid', '4px solid'],
   radii: {
     none: '0',
     normal: '0.4rem',
     round: '50%',
+    alwaysround: '100vw',
   },
   colors: {
     black: '#000',
