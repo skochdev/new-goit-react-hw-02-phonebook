@@ -4,7 +4,7 @@ export const Form = styled.form`
   display: flex;
   flex-flow: column;
   margin: 0 auto;
-  width: 400px;
+  width: 100%;
 
   label {
     display: flex;

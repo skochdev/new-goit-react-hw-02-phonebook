@@ -68,12 +68,14 @@ class App extends Component {
   render() {
     const { handleAddNewContact, handleFilter, handleDeleteContact } = this;
     const { contacts, filter } = this.state;
-    const filteredContacts = contacts.filter(c =>
-      c.fullName.toLowerCase().includes(filter.toLowerCase())
+    const filteredContacts = contacts.filter(
+      c =>
+        c.fullName.toLowerCase().includes(filter.toLowerCase()) ||
+        c.phoneNumber.includes(filter)
     );
     return (
       <main>
-        <Box as="section" my={5} mx={4}>
+        <Box as="section" my={5} maxWidth="600px" mx="auto">
           <Box as="h1" textAlign="center">
             Phonebook
           </Box>
@@ -87,22 +89,22 @@ class App extends Component {
               onDeleteContactClick={handleDeleteContact}
             />
           </Box>
+          <S.About as={Box} mt={5}>
+            <p>
+              This is a homework assignment. React class components, TypeScript.
+              Utilizing <span>Formik</span> for forms,
+              <span> yup</span> for validation,
+              <span> Styled Components</span> for styling,
+              <span> Styled System</span> for theming, <span>Box</span> custom
+              utility component.
+            </p>
+            <p>
+              At this point you're able to add/remove contacts, filter existing
+              ones, duplicates are ignored, alert informs about duplication.
+            </p>
+            <p>Styling is basic, styled components and Box mostly.</p>
+          </S.About>
         </Box>
-        <S.About as={Box} mx="auto" mt={5} width="600px">
-          <p>
-            This is a homework assignment. React class components, TypeScript.
-            Utilizing <span>Formik</span> for forms,
-            <span> yup</span> for validation,
-            <span> Styled Components</span> for styling,
-            <span> Styled System</span> for theming, <span>Box</span> custom
-            utility component.
-          </p>
-          <p>
-            At this point you're able to add/remove contacts, filter existing
-            ones, duplicates are ignored, alert informs about duplication.
-          </p>
-          <p>Styling is basic, styled components and Box mostly.</p>
-        </S.About>
       </main>
     );
   }
