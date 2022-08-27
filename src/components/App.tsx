@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, Component, ChangeEvent } from 'react';
+import React, { Component } from 'react';
 import { Box } from '../utils/Box';
 import { AddNewContact } from './AddNewContact/AddNewContact';
 import { ContactList } from './ContactList/ContactList';
