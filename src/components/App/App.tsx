@@ -74,13 +74,13 @@ class App extends Component {
         c.phoneNumber.includes(filter)
     );
     return (
-      <main>
+      <Box as="main" mx={4}>
         <Box as="section" my={5} maxWidth="600px" mx="auto">
           <Box as="h1" textAlign="center">
             Phonebook
           </Box>
           <AddNewContact onAddNewContact={handleAddNewContact} />
-          <Box my={5} textAlign="center">
+          <Box my={5} mx={4}>
             <Filter onFilterChange={handleFilter} filterValue={filter} />
           </Box>
           <Box my={5} textAlign="center">
@@ -105,7 +105,7 @@ class App extends Component {
             <p>Styling is basic, styled components and Box mostly.</p>
           </S.About>
         </Box>
-      </main>
+      </Box>
     );
   }
 }

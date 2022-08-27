@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const ContactList = styled.ul`
-  width: 600px;
+  width: 100%;
   font-weight: ${p => p.theme.fontWeights[1]};
 `;
 
