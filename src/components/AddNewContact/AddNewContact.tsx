@@ -45,15 +45,15 @@ const ValidationError = ({ name }: { name: string }) => {
 };
 // Formik-related <-
 
-// Props +
+// Props ->
 interface Props {
   onAddNewContact: (newContact: Contact) => void;
 }
 
-// Props -
+// Props <-
 
 export const AddNewContact: React.FC<Props> = ({ onAddNewContact }) => {
-  // collects form fields values and pass them up
+  // collects form fields values and passes them up
   const handleSubmit = (
     values: Contact,
     { resetForm }: { resetForm: () => void }
